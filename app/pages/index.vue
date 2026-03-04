@@ -1,10 +1,18 @@
 <script setup>
-
-const { data: featured } = await useAsyncData("featured-projects", () =>
-  queryCollection("projects")
-    .where("featured", "=", true)
-    .all()
+const { data: featured, refresh } = await useAsyncData(
+  "featured-projects",
+  () => queryCollection("projects").all(),
+  {
+    default: () => [],
+    transform: (projects) => projects.filter((project) => Boolean(project.featured)),
+  }
 )
+
+onMounted(() => {
+  if (!featured.value?.length) {
+    refresh()
+  }
+})
 </script>
 
 <template>
