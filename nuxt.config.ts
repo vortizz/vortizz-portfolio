@@ -10,9 +10,12 @@ export default defineNuxtConfig({
   css: ['~/assets/css/main.css'],
   app: {
     head: {
-      title: "Victor Ortiz — Full-Stack Engineer",
+      title: "Victor Ortiz - Full-Stack Engineer",
       meta: [
-        { name: "description", content: "Portfolio of Victor Ortiz — Full-stack engineer building data-driven platforms and real-time systems." },
+        { name: "description", content: "Portfolio of Victor Ortiz - Full-stack engineer building data-driven platforms and real-time systems." },
+      ],
+      link: [
+        { rel: 'icon', type: 'image/png', href: '/favicon.png' },
       ],
     },
   },
