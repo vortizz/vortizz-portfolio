@@ -18,10 +18,15 @@
         </div>
       </div>
     </footer>
+
+    <Analytics />
+    <SpeedInsights />
   </div>
 </template>
 
 <script setup lang="ts">
+import { Analytics } from '@vercel/analytics/nuxt'
+import { SpeedInsights } from '@vercel/speed-insights/nuxt'
 import GlowBackground from "~/components/GlowBackground.vue"
 import Navbar from "~/components/Navbar.vue"
 </script>
