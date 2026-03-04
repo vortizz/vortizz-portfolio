@@ -1,0 +1,10 @@
+@import "tailwindcss";
+@import "@nuxt/ui";
+
+html { scroll-behavior: smooth; }
+.prose h2, .prose h3 { scroll-margin-top: 120px; }
+
+.dark .bet-monks-mm-logo,
+.dark-mode .bet-monks-mm-logo {
+  filter: brightness(0) invert(1);
+}
