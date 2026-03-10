@@ -1,46 +1,120 @@
 <script setup lang="ts">
-const timeline = [
+type RelatedProject = {
+  title: string
+  path: string
+}
+
+type TimelineItem = {
+  range: string
+  company: string
+  companyUrl?: string
+  title: string
+  impact: string
+  stack: string[]
+  relatedProjects?: RelatedProject[]
+}
+
+const timeline: TimelineItem[] = [
   {
     range: "Nov 2024 - Present",
     company: "ClimaSens",
+    companyUrl: "https://www.climasens.com/",
     title: "Frontend Engineer",
     impact:
-      "Building the frontend of an enterprise climate risk platform with Mapbox, large datasets, filters, and long-term analytics views.",
+      "Leading frontend delivery for a production climate intelligence platform, expanding flood, fire, heat, and wind analysis across map-heavy workflows while keeping long-horizon scenario exploration scalable and performant.",
+    stack: ["Vue.js", "Nuxt.js", "Tailwind CSS", "Mapbox GL JS", "Firebase", "Carbon Vue", "JavaScript/TypeScript"],
+    relatedProjects: [
+      {
+        title: "Climate Risk Map Platform",
+        path: "/projects/climate-risk-map",
+      },
+    ],
   },
   {
     range: "Apr 2024 - Mar 2025",
     company: "VERT Capital",
+    companyUrl: "https://www.vert-capital.com/en",
     title: "Data Engineer",
     impact:
-      "Built production data workflows and platform features for financial operations in a business-critical environment.",
+      "Developed and maintained applications that process, record, and manage payments and financial data across multiple funds, supporting structured operations and securitisation workflows with accuracy, reliability, and scalability across agribusiness, fintech, commercial, and real estate credit.",
+    stack: ["Databricks", "Python", "PySpark", "React.js", "Remix", "Tailwind CSS", "TypeScript", "SQL", "AWS"],
   },
   {
     range: "Dec 2023 - Feb 2024",
     company: "MediaMonks",
+    companyUrl: "https://www.monks.com/",
     title: "Full-Stack Engineer (Contract)",
     impact:
-      "Delivered full-stack features for interactive campaigns and real-time systems with fast production timelines.",
+      "Shipped campaign application work for Burger King's AI-driven Whopper experience, connecting a multi-step frontend flow to backend and generation services so users could move cleanly from configuration to final submission.",
+    stack: ["React.js", "Redux", "Material UI", "Tailwind CSS", "JavaScript/TypeScript"],
+    relatedProjects: [
+      {
+        title: "BK Million Dollar Whopper Platform",
+        path: "/projects/bk-million-dollar-whopper",
+      },
+    ],
   },
   {
     range: "Dec 2021 - Mar 2023",
     company: "MediaMonks",
+    companyUrl: "https://www.monks.com/",
     title: "Full Stack Engineer",
     impact:
-      "Built full-stack applications for live events, interactive experiences, and high-traffic digital platforms.",
+      "Built the application layer behind tournament, live-event, and broadcast experiences, including real-time leaderboard updates, NFC-based scoring and redemption across a 30,000 sq ft venue, moderated photo publishing at TwitchCon 2022, and low-latency remote control during a live Valorant broadcast.",
+    stack: [
+      "Node.js",
+      "NestJS",
+      "Vue.js",
+      "MongoDB",
+      "Quasar Framework",
+      "TypeScript",
+      "AWS S3",
+      "SendGrid",
+      "RabbitMQ",
+      "WebSocket",
+    ],
+    relatedProjects: [
+      {
+        title: "Bet.Monks World Cup Predictions",
+        path: "/projects/bet-monks-world-cup-predictions",
+      },
+      {
+        title: "Cooltopia - Cool Cats NFT",
+        path: "/projects/cool-cats-event",
+      },
+      {
+        title: "TwitchCon - The Emotifier",
+        path: "/projects/twitchcon-photo-system",
+      },
+      {
+        title: "Valorant Live Interaction System",
+        path: "/projects/valorant-live-robot",
+      },
+    ],
   },
   {
     range: "Jul 2020 - Dec 2021",
     company: "Qualicorp",
+    companyUrl: "https://www.qualicorp.com.br/",
     title: "Full Stack Engineer",
     impact:
-      "Developed core features for a nationwide insurance sales platform with complex workflows, permissions, and validation rules.",
+      "Built and stabilized core features for a nationwide insurance sales platform, supporting proposal workflows, governance controls, and validation-heavy user journeys in a large production operation.",
+    stack: ["Node.js", "Express.js", "Vue.js", "Neo4j", "BootstrapVue", "Vuetify", "AWS S3", "JavaScript/TypeScript"],
+    relatedProjects: [
+      {
+        title: "QualiVendas Insurance Sales Platform",
+        path: "/projects/qualivendas-platform",
+      },
+    ],
   },
   {
     range: "May 2018 - Jul 2020",
     company: "Hexa Solution",
+    companyUrl: "http://www.hexasolution.com.br/",
     title: "Backend Engineer",
     impact:
-      "Built backend services, APIs, and business logic for production web systems used in real operations.",
+      "Worked as a backend engineer on a Bradesco engagement, helping build a system that validated source code across multiple programming languages and automatically enforced client requirements during the commit process.",
+    stack: ["Visual Basic (VB)", "C#", "ASP.NET", "SQL Server", "Vue.js", "JavaScript"],
   },
 ]
 </script>
@@ -51,7 +125,7 @@ const timeline = [
       <div>
         <h2 class="text-2xl font-semibold tracking-tight">Experience Timeline</h2>
         <p class="mt-2 text-sm text-slate-600 dark:text-slate-300">
-          Core technologies used across frontend, backend, and data platforms.
+          Roles across frontend, backend, and data work, tied to the case studies that show the work in more detail.
         </p>
       </div>
     </div>
@@ -71,14 +145,52 @@ const timeline = [
             {{ item.range }}
           </p>
 
-          <h3 class="mt-3 text-base font-semibold text-slate-900 dark:text-slate-100">
-            {{ item.company }}
+          <h3 class="mt-3 flex flex-wrap items-center gap-x-2 gap-y-1 text-base font-semibold text-slate-900 dark:text-slate-100">
+            <a
+              v-if="item.companyUrl"
+              :href="item.companyUrl"
+              target="_blank"
+              rel="noreferrer"
+              class="inline-flex items-center gap-1 rounded-sm text-cyan-700 transition hover:text-cyan-800 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-cyan-500 dark:text-cyan-300 dark:hover:text-cyan-200"
+            >
+              {{ item.company }}
+              <span aria-hidden="true" class="text-[11px]">↗</span>
+            </a>
+            <span v-else>{{ item.company }}</span>
             <span class="text-slate-500 dark:text-slate-400">- {{ item.title }}</span>
           </h3>
 
           <p class="mt-2 text-sm leading-relaxed text-slate-600 dark:text-slate-300">
             {{ item.impact }}
           </p>
+
+          <div class="mt-4 flex flex-wrap gap-2">
+            <UBadge
+              v-for="tech in item.stack"
+              :key="tech"
+              variant="soft"
+              color="neutral"
+            >
+              {{ tech }}
+            </UBadge>
+          </div>
+
+          <div v-if="item.relatedProjects?.length" class="mt-4 border-t border-slate-200 pt-4 dark:border-slate-800">
+            <p class="text-xs font-medium uppercase tracking-[0.18em] text-slate-500 dark:text-slate-400">
+              Related case studies
+            </p>
+
+            <div class="mt-3 flex flex-wrap gap-2">
+              <NuxtLink
+                v-for="project in item.relatedProjects"
+                :key="project.path"
+                :to="project.path"
+                class="inline-flex items-center rounded-full border border-cyan-200 bg-cyan-50 px-3 py-1.5 text-xs font-medium text-cyan-700 transition hover:border-cyan-300 hover:bg-cyan-100 dark:border-cyan-900/70 dark:bg-cyan-950/40 dark:text-cyan-200 dark:hover:bg-cyan-950/70"
+              >
+                {{ project.title }}
+              </NuxtLink>
+            </div>
+          </div>
         </article>
       </li>
     </ol>

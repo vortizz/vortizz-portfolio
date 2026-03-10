@@ -22,7 +22,7 @@ featured: true
   </div>
 </div>
 
-::stack-chips{:items='["Node.js (Express.js)", "Vue.js", "Neo4j", "BootstrapVue", "Vuetify", "AWS S3", "JavaScript/TypeScript"]'}
+::stack-chips{:items='["Node.js", "Express.js", "Vue.js", "Neo4j", "BootstrapVue", "Vuetify", "AWS S3", "JavaScript/TypeScript"]'}
 ::
 
 ::screenshot{src="/images/projects/qualivendas/overview.mov" type="video" caption="Enterprise application ecosystem for health insurance proposal creation, governance, and operational management"}
