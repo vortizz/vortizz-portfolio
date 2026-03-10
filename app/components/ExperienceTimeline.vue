@@ -21,7 +21,7 @@ const timeline: TimelineItem[] = [
     companyUrl: "https://www.climasens.com/",
     title: "Frontend Engineer",
     impact:
-      "Leading frontend delivery for an enterprise climate-risk platform, shipping map-heavy product features across hazard layers, analytics views, and long-horizon scenario exploration.",
+      "Leading frontend delivery for a production climate intelligence platform, expanding flood, fire, heat, and wind analysis across map-heavy workflows while keeping long-horizon scenario exploration scalable and performant.",
     stack: ["Vue.js", "Nuxt.js", "Tailwind CSS", "Mapbox GL JS", "Firebase", "Carbon Vue", "JavaScript/TypeScript"],
     relatedProjects: [
       {
@@ -36,7 +36,7 @@ const timeline: TimelineItem[] = [
     companyUrl: "https://www.vert-capital.com/en",
     title: "Data Engineer",
     impact:
-      "Built production data workflows and internal platform features that supported business-critical financial operations, with a focus on reliability, structured data handling, and operational reporting.",
+      "Developed and maintained applications that process, record, and manage payments and financial data across multiple funds, supporting structured operations and securitisation workflows with accuracy, reliability, and scalability across agribusiness, fintech, commercial, and real estate credit.",
     stack: ["Databricks", "Python", "PySpark", "React.js", "Remix", "Tailwind CSS", "TypeScript", "SQL", "AWS"],
   },
   {
@@ -45,7 +45,7 @@ const timeline: TimelineItem[] = [
     companyUrl: "https://www.monks.com/",
     title: "Full-Stack Engineer (Contract)",
     impact:
-      "Delivered campaign-focused application work across frontend and backend, connecting polished user flows to APIs and async systems under tight production timelines.",
+      "Shipped campaign application work for Burger King's AI-driven Whopper experience, connecting a multi-step frontend flow to backend and generation services so users could move cleanly from configuration to final submission.",
     stack: ["React.js", "Redux", "Material UI", "Tailwind CSS", "JavaScript/TypeScript"],
     relatedProjects: [
       {
@@ -60,7 +60,7 @@ const timeline: TimelineItem[] = [
     companyUrl: "https://www.monks.com/",
     title: "Full Stack Engineer",
     impact:
-      "Built full-stack systems for live events and branded digital products, spanning real-time event tooling, internal platforms, APIs, CMS workflows, and participant-facing experiences.",
+      "Built the application layer behind tournament, live-event, and broadcast experiences, including real-time leaderboard updates, NFC-based scoring and redemption across a 30,000 sq ft venue, moderated photo publishing at TwitchCon 2022, and low-latency remote control during a live Valorant broadcast.",
     stack: [
       "Node.js",
       "NestJS",
@@ -98,7 +98,7 @@ const timeline: TimelineItem[] = [
     companyUrl: "https://www.qualicorp.com.br/",
     title: "Full Stack Engineer",
     impact:
-      "Developed core platform features for a nationwide insurance sales operation, handling multi-step workflows, business rules, permissions, and validation-heavy user journeys.",
+      "Built and stabilized core features for a nationwide insurance sales platform, supporting proposal workflows, governance controls, and validation-heavy user journeys in a large production operation.",
     stack: ["Node.js", "Express.js", "Vue.js", "Neo4j", "BootstrapVue", "Vuetify", "AWS S3", "JavaScript/TypeScript"],
     relatedProjects: [
       {
@@ -113,7 +113,7 @@ const timeline: TimelineItem[] = [
     companyUrl: "http://www.hexasolution.com.br/",
     title: "Backend Engineer",
     impact:
-      "Built backend services, APIs, and business logic for production systems, establishing the engineering base that later expanded into full-stack and product-facing work.",
+      "Worked as a backend engineer on a Bradesco engagement, helping build a system that validated source code across multiple programming languages and automatically enforced client requirements during the commit process.",
     stack: ["Visual Basic (VB)", "C#", "ASP.NET", "SQL Server", "Vue.js", "JavaScript"],
   },
 ]
