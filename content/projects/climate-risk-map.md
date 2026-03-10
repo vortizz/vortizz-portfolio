@@ -1,7 +1,7 @@
 ---
 title: Climate Risk Map Platform
 tagline: Enterprise geospatial SaaS frontend for climate risk analysis and decision support
-tags: ["Vue.js", "Nuxt.js", "Tailwind CSS", "Mapbox GL JS", "Carbon Vue"]
+tags: ["Vue.js", "Nuxt.js", "Tailwind CSS", "Mapbox GL JS", "Firebase", "Carbon Vue", "JavaScript/TypeScript"]
 featured: true
 ---
 
@@ -22,7 +22,7 @@ featured: true
   </div>
 </div>
 
-::stack-chips{:items='["Vue.js", "Nuxt.js", "Tailwind CSS", "Mapbox GL JS", "Carbon Vue"]'}
+::stack-chips{:items='["Vue.js", "Nuxt.js", "Tailwind CSS", "Mapbox GL JS", "Firebase", "Carbon Vue", "JavaScript/TypeScript"]'}
 ::
 
 ::media-carousel{:items='[{"type": "image", "src": "/images/projects/heat-risk/overview.webp", "caption": "Enterprise climate risk map interface with dynamic hazard layers, filters, and analytics views."}, {"type": "image", "src": "/images/projects/heat-risk/futureHeatCropped.png", "caption": "Long-term heat risk visualization with scenario-based projections and time-horizon exploration."}, {"type": "image", "src": "/images/projects/heat-risk/buildings.png", "caption": "Asset-level map overlays for property analysis and location-specific climate risk inspection."}]'}
