@@ -134,7 +134,7 @@ These are used inside Markdown content to keep case studies structured and visua
 
 ## Deployment
 
-This project is configured for Vercel via [`vercel.json`](/Users/victorortiz/Documents/vortizz-portfolio/vercel.json).
+This project is configured for Vercel via `vercel.json`.
 
 Build settings:
 
