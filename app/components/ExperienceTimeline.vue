@@ -43,7 +43,7 @@ const timeline: TimelineItem[] = [
     range: "Dec 2023 - Feb 2024",
     company: "MediaMonks",
     companyUrl: "https://www.monks.com/",
-    title: "Full-Stack Engineer (Contract)",
+    title: "Full-Stack Engineer",
     impact:
       "Shipped campaign application work for Burger King's AI-driven Whopper experience, connecting a multi-step frontend flow to backend and generation services so users could move cleanly from configuration to final submission.",
     stack: ["React.js", "Redux", "Material UI", "Tailwind CSS", "JavaScript/TypeScript"],
@@ -96,7 +96,7 @@ const timeline: TimelineItem[] = [
     range: "Jul 2020 - Dec 2021",
     company: "Qualicorp",
     companyUrl: "https://www.qualicorp.com.br/",
-    title: "Full Stack Engineer",
+    title: "Full Stack Engineer → Technical Lead",
     impact:
       "Built and stabilized core features for a nationwide insurance sales platform, supporting proposal workflows, governance controls, and validation-heavy user journeys in a large production operation.",
     stack: ["Node.js", "Express.js", "Vue.js", "Neo4j", "BootstrapVue", "Vuetify", "AWS S3", "JavaScript/TypeScript"],

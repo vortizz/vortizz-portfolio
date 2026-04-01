@@ -16,13 +16,16 @@
         </h1>
 
         <p class="mt-5 max-w-2xl text-base leading-relaxed text-slate-600 dark:text-slate-300">
-          I work across frontend and backend, mainly with Vue/Nuxt and Node/NestJS.
-          My projects include enterprise workflows, real-time interaction systems,
-          and data-heavy platforms used in production.
+          I build production systems for global clients, from real-time live event platforms to 
+          enterprise SaaS and geospatial tools. My core stack is Vue/Nuxt and Node/NestJS, with 
+          experience across React, Python, and data engineering.
         </p>
 
         <div class="mt-7 flex flex-wrap gap-3">
           <UButton size="lg" to="/#projects">View case studies</UButton>
+          <a href="/Victor_Ortiz_Resume.pdf" download>
+            <UButton size="lg" variant="outline" as="span">Download CV</UButton>
+          </a>
           <UButton size="lg" variant="outline" to="https://github.com/vortizz" target="_blank">GitHub</UButton>
           <UButton size="lg" variant="ghost" to="/#contact">Contact</UButton>
         </div>
@@ -49,7 +52,7 @@
 
           <div class="mt-6 grid grid-cols-3 gap-3">
             <div class="rounded-xl border border-slate-200 bg-white p-3 text-center dark:border-slate-800 dark:bg-slate-950">
-              <div class="text-lg font-semibold">5+</div>
+              <div class="text-lg font-semibold">7+</div>
               <div class="text-xs text-slate-500 dark:text-slate-400">Years</div>
             </div>
             <div class="rounded-xl border border-slate-200 bg-white p-3 text-center dark:border-slate-800 dark:bg-slate-950">

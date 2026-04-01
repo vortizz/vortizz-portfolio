@@ -27,7 +27,7 @@ onMounted(() => {
       <div>
         <h2 class="text-2xl font-semibold tracking-tight">Featured case studies</h2>
         <p class="mt-2 text-sm text-slate-600 dark:text-slate-300">
-          A few projects that show the balance of product UX, backend systems, and data work.
+          Three projects that best represent the range and depth of my work.
         </p>
       </div>
       <UButton variant="ghost" to="/projects" class="text-no">View all</UButton>
