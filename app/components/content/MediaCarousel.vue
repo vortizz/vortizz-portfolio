@@ -279,7 +279,7 @@ function onSwipeCancel() {
           <div class="mt-1 truncate text-sm font-semibold text-slate-900 dark:text-slate-100">
             {{ index + 1 }} / {{ mediaItems.length }}
             <span v-if="activeItem?.caption" class="font-normal text-slate-500 dark:text-slate-400">
-              — {{ activeItem.caption }}
+              - {{ activeItem.caption }}
             </span>
           </div>
         </div>
@@ -433,7 +433,7 @@ function onSwipeCancel() {
           <div class="min-w-0 text-sm font-medium text-white/90">
             {{ index + 1 }} / {{ mediaItems.length }}
             <span v-if="activeItem?.caption" class="ml-1 text-white/60">
-              — {{ activeItem.caption }}
+              - {{ activeItem.caption }}
             </span>
           </div>
 

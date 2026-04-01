@@ -7,17 +7,20 @@
         </h2>
 
         <p class="mt-5 text-base leading-relaxed text-slate-600 dark:text-slate-300">
-          I'm a Full-Stack Engineer focused on building production systems 
-          that handle complex logic, real-time interactions, and data-heavy workflows. 
-          My experience includes enterprise SaaS platforms, geospatial visualization 
-          tools, and live interaction systems used in real-world environments.
+          I'm a Full-Stack Engineer with 7+ years of experience building production systems
+          for global clients and well-known brands. Most of my work sits at the intersection
+          of complex frontend architecture and reliable backend workflows, think real-time
+          event platforms, enterprise SaaS, and data-heavy geospatial tools.
         </p>
 
         <p class="mt-4 text-base leading-relaxed text-slate-600 dark:text-slate-300">
-          I specialize in designing scalable backend architectures and modular 
-          frontend systems that remain reliable as products grow in complexity. 
-          I enjoy working on systems where performance, data flow, and 
-          long-term maintainability truly matter.
+          My stack is mainly Vue/Nuxt and Node/NestJS, but I've worked across React, Python,
+          and data engineering depending on what the project needs. A few highlights: leading
+          the frontend of an enterprise climate risk platform used by businesses and governments
+          across Australia, owning the full application layer for a large-scale NFC-powered
+          live event across a 30,000 sq ft venue in New York, and growing into a Technical
+          Lead role while building a nationwide health insurance sales platform used by
+          brokers across Brazil.
         </p>
 
         <div class="mt-8 grid gap-4 sm:grid-cols-2">
