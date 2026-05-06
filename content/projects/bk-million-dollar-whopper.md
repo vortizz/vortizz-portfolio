@@ -1,8 +1,10 @@
 ---
 title: BK Million Dollar Whopper Platform
 tagline: Frontend experience for an AI-powered Burger King campaign
-tags: ["React.js", "Redux", "Material UI", "Tailwind CSS", "JavaScript/TypeScript"]
+tags:
+  ["React.js", "Redux", "Material UI", "Tailwind CSS", "JavaScript/TypeScript"]
 featured: false
+sortOrder: 6
 ---
 
 <div class="mb-8 flex items-center gap-4 rounded-xl border border-slate-200 bg-white/60 px-4 py-3 backdrop-blur dark:border-slate-800 dark:bg-slate-950/50">
@@ -29,6 +31,7 @@ featured: false
 ::
 
 ---
+
 ## Overview
 
 BK Million Dollar Whopper was a national campaign experience where users could build a custom Whopper, generate an AI image and jingle, and submit their creation to compete for a $1,000,000 prize.

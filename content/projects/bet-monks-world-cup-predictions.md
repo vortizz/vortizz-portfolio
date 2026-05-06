@@ -1,8 +1,21 @@
 ---
 title: Bet.Monks World Cup Predictions
 tagline: Full-stack internal prediction platform for Media.Monks employees during the FIFA Women's World Cup 2023
-tags: ["Node.js", "NestJS", "TypeScript", "MongoDB", "Vue.js", "Quasar Framework", "OAuth 2.0 (Google)", "AWS S3", "Simple Queue Service (SQS)", "Swagger"]
+tags:
+  [
+    "Node.js",
+    "NestJS",
+    "TypeScript",
+    "MongoDB",
+    "Vue.js",
+    "Quasar Framework",
+    "OAuth 2.0 (Google)",
+    "AWS S3",
+    "Simple Queue Service (SQS)",
+    "Swagger",
+  ]
 featured: false
+sortOrder: 7
 ---
 
 <div class="mb-8 flex items-center gap-4 rounded-xl border border-slate-200 bg-white/60 px-4 py-3 backdrop-blur dark:border-slate-800 dark:bg-slate-950/50">

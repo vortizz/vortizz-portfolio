@@ -1,4 +1,4 @@
-import { defineContentConfig, defineCollection, z } from "@nuxt/content"
+import { defineContentConfig, defineCollection, z } from "@nuxt/content";
 
 export default defineContentConfig({
   collections: {
@@ -10,7 +10,8 @@ export default defineContentConfig({
         tagline: z.string().optional(),
         tags: z.array(z.string()).optional(),
         featured: z.boolean().optional(),
+        sortOrder: z.number().optional(),
       }),
     }),
   },
-})
+});

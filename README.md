@@ -3,6 +3,7 @@
 Personal portfolio and case-study site built with Nuxt 4, Nuxt Content, and Nuxt UI.
 
 The site is designed to present:
+
 - a focused landing page with positioning, skills, featured work, and experience
 - a content-driven projects index
 - detailed case studies authored in Markdown
@@ -98,6 +99,7 @@ title: Project Title
 tagline: Short description
 tags: ["Nuxt", "Vue", "TypeScript"]
 featured: true
+sortOrder: 1
 ---
 ```
 

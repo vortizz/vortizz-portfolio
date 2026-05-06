@@ -3,6 +3,7 @@ title: TwitchCon - The Emotifier
 tagline: Real-time photo management platform built for a large-scale live event
 tags: ["Node.js", "Vue.js", "NestJS", "MongoDB", "Quasar Framework", "SendGrid", "AWS S3", "JavaScript/TypeScript"]
 featured: false
+sortOrder: 7
 ---
 
 <div class="mb-8 flex items-center gap-4 rounded-xl border border-slate-200 bg-white/60 px-4 py-3 backdrop-blur dark:border-slate-800 dark:bg-slate-950/50">

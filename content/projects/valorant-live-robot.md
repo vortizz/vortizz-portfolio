@@ -2,6 +2,7 @@
 title: Valorant Live Interaction System
 tagline: Real-time audience control platform for a live Twitch broadcast
 tags: ["Node.js", "NestJS", "WebSocket", "MongoDB", "JavaScript/TypeScript"]
+sortOrder: 5
 ---
 
 <div class="mb-8 flex items-center gap-4 rounded-xl border border-slate-200 bg-white/60 px-4 py-3 backdrop-blur dark:border-slate-800 dark:bg-slate-950/50">
