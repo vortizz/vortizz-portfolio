@@ -1,8 +1,19 @@
 ---
 title: QualiVendas Insurance Sales Platform
 tagline: Enterprise insurance sales ecosystem for proposal workflow, governance, and operations at nationwide scale
-tags: ["Node.js", "Vue.js", "Express.js", "Neo4j", "BootstrapVue", "Vuetify", "AWS S3", "JavaScript/TypeScript"]
+tags:
+  [
+    "Node.js",
+    "Vue.js",
+    "Express.js",
+    "Neo4j",
+    "BootstrapVue",
+    "Vuetify",
+    "AWS S3",
+    "JavaScript/TypeScript",
+  ]
 featured: true
+sortOrder: 3
 ---
 
 <div class="mb-8 flex items-center gap-4 rounded-xl border border-slate-200 bg-white/60 px-4 py-3 backdrop-blur dark:border-slate-800 dark:bg-slate-950/50">
@@ -42,8 +53,8 @@ The system replaced manual and fragmented processes with a structured digital wo
 
 The ecosystem includes two connected platforms:
 
-- **Broker Platform**: used by brokers to create and submit health insurance proposals  
-- **Admin Platform**: used by supervisors and managers to control permissions, monitor operations, and manage governance  
+- **Broker Platform**: used by brokers to create and submit health insurance proposals
+- **Admin Platform**: used by supervisors and managers to control permissions, monitor operations, and manage governance
 
 I worked on the project in two phases: first as a Full-Stack Engineer building core features, and later as a Technical Lead guiding technical decisions, code quality, and delivery execution.
 

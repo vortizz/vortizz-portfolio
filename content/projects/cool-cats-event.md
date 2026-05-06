@@ -1,8 +1,22 @@
 ---
 title: Cooltopia - Cool Cats NFT
 tagline: Full-stack NFC-powered event platform for a large-scale interactive live experience
-tags: ["Node.js", "NestJS", "MongoDB", "RabbitMQ", "MQTT", "SendGrid", "Vue.js", "Quasar Framework", "Electron", "Ionic Vue", "JavaScript/TypeScript"]
+tags:
+  [
+    "Node.js",
+    "NestJS",
+    "MongoDB",
+    "RabbitMQ",
+    "MQTT",
+    "SendGrid",
+    "Vue.js",
+    "Quasar Framework",
+    "Electron",
+    "Ionic Vue",
+    "JavaScript/TypeScript",
+  ]
 featured: true
+sortOrder: 4
 ---
 
 <div class="mb-8 flex items-center gap-4 rounded-xl border border-slate-200 bg-white/60 px-4 py-3 backdrop-blur dark:border-slate-800 dark:bg-slate-950/50">

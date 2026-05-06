@@ -1,48 +1,48 @@
 <script setup lang="ts">
 type MediaItem = {
-  type: "image" | "video"
-  src: string
-  alt?: string
-  poster?: string
-  caption?: string
-  thumb?: string
-}
+  type: "image" | "video";
+  src: string;
+  alt?: string;
+  poster?: string;
+  caption?: string;
+  thumb?: string;
+};
 
 const props = defineProps<{
-  items: MediaItem[] | string
-  caption?: string
-  aspectClass?: string
-}>()
+  items: MediaItem[] | string;
+  caption?: string;
+  aspectClass?: string;
+}>();
 
-const aspectClass = computed(() => props.aspectClass ?? "aspect-video")
+const aspectClass = computed(() => props.aspectClass ?? "aspect-video");
 
 const mediaItems = computed<MediaItem[]>(() => {
-  if (Array.isArray(props.items)) return props.items
-  if (typeof props.items !== "string") return []
+  if (Array.isArray(props.items)) return props.items;
+  if (typeof props.items !== "string") return [];
   try {
-    const parsed = JSON.parse(props.items)
-    return Array.isArray(parsed) ? parsed : []
+    const parsed = JSON.parse(props.items);
+    return Array.isArray(parsed) ? parsed : [];
   } catch {
-    return []
+    return [];
   }
-})
+});
 
-const index = ref(0)
-const direction = ref<"next" | "prev">("next")
-const activeItem = computed(() => mediaItems.value[index.value])
-const carouselRootRef = ref<HTMLElement | null>(null)
-const thumbsRef = ref<HTMLElement | null>(null)
-const suppressThumbClick = ref(false)
-const isFullscreen = ref(false)
-const fullscreenSupported = ref(false)
-const pseudoFullscreen = ref(false)
+const index = ref(0);
+const direction = ref<"next" | "prev">("next");
+const activeItem = computed(() => mediaItems.value[index.value]);
+const carouselRootRef = ref<HTMLElement | null>(null);
+const thumbsRef = ref<HTMLElement | null>(null);
+const suppressThumbClick = ref(false);
+const isFullscreen = ref(false);
+const fullscreenSupported = ref(false);
+const pseudoFullscreen = ref(false);
 
 const thumbDrag = reactive({
   active: false,
   moved: false,
   startX: 0,
   startScrollLeft: 0,
-})
+});
 
 const swipe = reactive({
   active: false,
@@ -50,217 +50,229 @@ const swipe = reactive({
   startY: 0,
   deltaX: 0,
   deltaY: 0,
-})
+});
 
 function clamp(i: number) {
-  const n = mediaItems.value.length
-  if (!n) return 0
-  return Math.max(0, Math.min(n - 1, i))
+  const n = mediaItems.value.length;
+  if (!n) return 0;
+  return Math.max(0, Math.min(n - 1, i));
 }
 
 function go(i: number) {
-  const next = clamp(i)
-  direction.value = next >= index.value ? "next" : "prev"
-  index.value = next
+  const next = clamp(i);
+  direction.value = next >= index.value ? "next" : "prev";
+  index.value = next;
 }
 
 function prev() {
-  go(index.value - 1)
+  go(index.value - 1);
 }
 function next() {
-  go(index.value + 1)
+  go(index.value + 1);
 }
 
 function onKeydown(e: KeyboardEvent) {
-  if (!mediaItems.value.length) return
-  if (e.key === "ArrowLeft") prev()
-  if (e.key === "ArrowRight") next()
+  if (!mediaItems.value.length) return;
+  if (e.key === "ArrowLeft") prev();
+  if (e.key === "ArrowRight") next();
 }
 
-const videoRef = ref<HTMLVideoElement | null>(null)
+const videoRef = ref<HTMLVideoElement | null>(null);
 
 watch(index, () => {
   if (videoRef.value) {
-    videoRef.value.pause()
-    videoRef.value.currentTime = 0
+    videoRef.value.pause();
+    videoRef.value.currentTime = 0;
   }
 
   nextTick(() => {
-    const container = thumbsRef.value
+    const container = thumbsRef.value;
     const activeThumb = container?.querySelector<HTMLButtonElement>(
       `button[data-thumb-index="${index.value}"]`,
-    )
+    );
     activeThumb?.scrollIntoView({
       behavior: "smooth",
       inline: "center",
       block: "nearest",
-    })
-  })
-})
+    });
+  });
+});
 
-onMounted(() => window.addEventListener("keydown", onKeydown))
+onMounted(() => window.addEventListener("keydown", onKeydown));
 onMounted(() => {
-  const root = carouselRootRef.value as (HTMLElement & { webkitRequestFullscreen?: () => Promise<void> | void }) | null
-  fullscreenSupported.value = !!root
-  document.addEventListener("fullscreenchange", syncFullscreenState)
-  document.addEventListener("webkitfullscreenchange", syncFullscreenState as EventListener)
-})
-onBeforeUnmount(() => window.removeEventListener("keydown", onKeydown))
+  const root = carouselRootRef.value as
+    | (HTMLElement & { webkitRequestFullscreen?: () => Promise<void> | void })
+    | null;
+  fullscreenSupported.value = !!root;
+  document.addEventListener("fullscreenchange", syncFullscreenState);
+  document.addEventListener(
+    "webkitfullscreenchange",
+    syncFullscreenState as EventListener,
+  );
+});
+onBeforeUnmount(() => window.removeEventListener("keydown", onKeydown));
 onBeforeUnmount(() => {
-  document.removeEventListener("fullscreenchange", syncFullscreenState)
-  document.removeEventListener("webkitfullscreenchange", syncFullscreenState as EventListener)
-  document.body.classList.remove("overflow-hidden")
-})
+  document.removeEventListener("fullscreenchange", syncFullscreenState);
+  document.removeEventListener(
+    "webkitfullscreenchange",
+    syncFullscreenState as EventListener,
+  );
+  document.body.classList.remove("overflow-hidden");
+});
 
 function thumbSrc(m: MediaItem) {
-  if (m.thumb) return m.thumb
-  if (m.type === "video" && m.poster) return m.poster
-  return m.src
+  if (m.thumb) return m.thumb;
+  if (m.type === "video" && m.poster) return m.poster;
+  return m.src;
 }
 
 function syncFullscreenState() {
-  isFullscreen.value = pseudoFullscreen.value || document.fullscreenElement === carouselRootRef.value
+  isFullscreen.value =
+    pseudoFullscreen.value ||
+    document.fullscreenElement === carouselRootRef.value;
 }
 
 async function toggleFullscreen() {
-  const root = carouselRootRef.value as (HTMLElement & {
-    requestFullscreen?: () => Promise<void>
-    webkitRequestFullscreen?: () => Promise<void> | void
-  }) | null
-  if (!root) return
+  const root = carouselRootRef.value as
+    | (HTMLElement & {
+        requestFullscreen?: () => Promise<void>;
+        webkitRequestFullscreen?: () => Promise<void> | void;
+      })
+    | null;
+  if (!root) return;
 
   if (pseudoFullscreen.value) {
-    pseudoFullscreen.value = false
-    document.body.classList.remove("overflow-hidden")
-    syncFullscreenState()
-    return
+    pseudoFullscreen.value = false;
+    document.body.classList.remove("overflow-hidden");
+    syncFullscreenState();
+    return;
   }
 
   if (document.fullscreenElement === root) {
-    await document.exitFullscreen()
-    return
+    await document.exitFullscreen();
+    return;
   }
 
   if (document.fullscreenElement) {
-    await document.exitFullscreen()
+    await document.exitFullscreen();
   }
 
   if (root.requestFullscreen) {
-    await root.requestFullscreen()
-    return
+    await root.requestFullscreen();
+    return;
   }
 
   if (root.webkitRequestFullscreen) {
-    await root.webkitRequestFullscreen()
-    return
+    await root.webkitRequestFullscreen();
+    return;
   }
 
-  pseudoFullscreen.value = true
-  document.body.classList.add("overflow-hidden")
-  syncFullscreenState()
+  pseudoFullscreen.value = true;
+  document.body.classList.add("overflow-hidden");
+  syncFullscreenState();
 }
 
 function onThumbPointerDown(e: PointerEvent) {
-  if (!thumbsRef.value || (e.pointerType === "mouse" && e.button !== 0)) return
+  if (!thumbsRef.value || (e.pointerType === "mouse" && e.button !== 0)) return;
 
-  thumbDrag.active = true
-  thumbDrag.moved = false
-  thumbDrag.startX = e.clientX
-  thumbDrag.startScrollLeft = thumbsRef.value.scrollLeft
-  thumbsRef.value.setPointerCapture(e.pointerId)
+  thumbDrag.active = true;
+  thumbDrag.moved = false;
+  thumbDrag.startX = e.clientX;
+  thumbDrag.startScrollLeft = thumbsRef.value.scrollLeft;
+  thumbsRef.value.setPointerCapture(e.pointerId);
 }
 
 function onThumbPointerMove(e: PointerEvent) {
-  if (!thumbsRef.value || !thumbDrag.active) return
+  if (!thumbsRef.value || !thumbDrag.active) return;
 
-  const deltaX = e.clientX - thumbDrag.startX
+  const deltaX = e.clientX - thumbDrag.startX;
   if (Math.abs(deltaX) > 4) {
-    thumbDrag.moved = true
+    thumbDrag.moved = true;
   }
 
-  thumbsRef.value.scrollLeft = thumbDrag.startScrollLeft - deltaX
+  thumbsRef.value.scrollLeft = thumbDrag.startScrollLeft - deltaX;
 }
 
 function onThumbPointerEnd(e: PointerEvent) {
-  if (!thumbsRef.value || !thumbDrag.active) return
-  const didMove = thumbDrag.moved
+  if (!thumbsRef.value || !thumbDrag.active) return;
+  const didMove = thumbDrag.moved;
 
   if (thumbsRef.value.hasPointerCapture(e.pointerId)) {
-    thumbsRef.value.releasePointerCapture(e.pointerId)
+    thumbsRef.value.releasePointerCapture(e.pointerId);
   }
 
-  suppressThumbClick.value = didMove
-  thumbDrag.active = false
+  suppressThumbClick.value = didMove;
+  thumbDrag.active = false;
 
   if (!didMove) {
     const el = document
       .elementFromPoint(e.clientX, e.clientY)
-      ?.closest<HTMLButtonElement>("button[data-thumb-index]")
+      ?.closest<HTMLButtonElement>("button[data-thumb-index]");
 
     if (el && thumbsRef.value.contains(el)) {
-      const thumbIndex = Number(el.dataset.thumbIndex)
+      const thumbIndex = Number(el.dataset.thumbIndex);
       if (!Number.isNaN(thumbIndex)) {
-        go(thumbIndex)
+        go(thumbIndex);
       }
     }
   }
 
   if (suppressThumbClick.value) {
     setTimeout(() => {
-      suppressThumbClick.value = false
-    }, 0)
+      suppressThumbClick.value = false;
+    }, 0);
   }
 }
 
 function onThumbClick(e: MouseEvent, i: number) {
   if (suppressThumbClick.value) {
-    e.preventDefault()
-    return
+    e.preventDefault();
+    return;
   }
-  go(i)
+  go(i);
 }
 
 function onSwipeStart(e: TouchEvent) {
-  if (mediaItems.value.length < 2 || e.touches.length !== 1) return
-  const t = e.touches[0]
-  if (!t) return
-  swipe.active = true
-  swipe.startX = t.clientX
-  swipe.startY = t.clientY
-  swipe.deltaX = 0
-  swipe.deltaY = 0
+  if (mediaItems.value.length < 2 || e.touches.length !== 1) return;
+  const t = e.touches[0];
+  if (!t) return;
+  swipe.active = true;
+  swipe.startX = t.clientX;
+  swipe.startY = t.clientY;
+  swipe.deltaX = 0;
+  swipe.deltaY = 0;
 }
 
 function onSwipeMove(e: TouchEvent) {
-  if (!swipe.active || e.touches.length !== 1) return
-  const t = e.touches[0]
-  if (!t) return
-  swipe.deltaX = t.clientX - swipe.startX
-  swipe.deltaY = t.clientY - swipe.startY
+  if (!swipe.active || e.touches.length !== 1) return;
+  const t = e.touches[0];
+  if (!t) return;
+  swipe.deltaX = t.clientX - swipe.startX;
+  swipe.deltaY = t.clientY - swipe.startY;
 }
 
 function onSwipeEnd() {
-  if (!swipe.active) return
+  if (!swipe.active) return;
 
-  const absX = Math.abs(swipe.deltaX)
-  const absY = Math.abs(swipe.deltaY)
-  const passedDistance = absX > 48
-  const mostlyHorizontal = absX > absY * 1.2
+  const absX = Math.abs(swipe.deltaX);
+  const absY = Math.abs(swipe.deltaY);
+  const passedDistance = absX > 48;
+  const mostlyHorizontal = absX > absY * 1.2;
 
   if (passedDistance && mostlyHorizontal) {
-    if (swipe.deltaX < 0) next()
-    else prev()
+    if (swipe.deltaX < 0) next();
+    else prev();
   }
 
-  swipe.active = false
-  swipe.deltaX = 0
-  swipe.deltaY = 0
+  swipe.active = false;
+  swipe.deltaX = 0;
+  swipe.deltaY = 0;
 }
 
 function onSwipeCancel() {
-  swipe.active = false
-  swipe.deltaX = 0
-  swipe.deltaY = 0
+  swipe.active = false;
+  swipe.deltaX = 0;
+  swipe.deltaY = 0;
 }
 </script>
 
@@ -268,17 +280,21 @@ function onSwipeCancel() {
   <figure v-if="mediaItems.length" class="my-10">
     <div
       ref="carouselRootRef"
-      class="rounded-xl border border-slate-200 bg-white/60 backdrop-blur
-             dark:border-slate-800 dark:bg-slate-950/60"
+      class="rounded-xl border border-slate-200 bg-white/60 backdrop-blur dark:border-slate-800 dark:bg-slate-950/60"
     >
       <div class="flex items-center justify-between gap-3 px-4 pt-4">
         <div class="min-w-0">
           <div class="text-xs font-medium text-slate-500 dark:text-slate-400">
             Gallery
           </div>
-          <div class="mt-1 truncate text-sm font-semibold text-slate-900 dark:text-slate-100">
+          <div
+            class="mt-1 truncate text-sm font-semibold text-slate-900 dark:text-slate-100"
+          >
             {{ index + 1 }} / {{ mediaItems.length }}
-            <span v-if="activeItem?.caption" class="font-normal text-slate-500 dark:text-slate-400">
+            <span
+              v-if="activeItem?.caption"
+              class="font-normal text-slate-500 dark:text-slate-400"
+            >
               - {{ activeItem.caption }}
             </span>
           </div>
@@ -288,21 +304,23 @@ function onSwipeCancel() {
           <button
             v-if="fullscreenSupported"
             type="button"
-            class="inline-flex items-center justify-center rounded-full border border-slate-200 bg-white/70 p-2 text-slate-700 shadow-sm backdrop-blur
-                   hover:bg-white dark:border-slate-800 dark:bg-slate-950/60 dark:text-slate-200 dark:hover:bg-slate-950"
+            class="inline-flex items-center justify-center rounded-full border border-slate-200 bg-white/70 p-2 text-slate-700 shadow-sm backdrop-blur hover:bg-white dark:border-slate-800 dark:bg-slate-950/60 dark:text-slate-200 dark:hover:bg-slate-950"
             @click="toggleFullscreen"
             :aria-label="isFullscreen ? 'Exit fullscreen' : 'Enter fullscreen'"
           >
             <UIcon
-              :name="isFullscreen ? 'i-heroicons-arrows-pointing-in-20-solid' : 'i-heroicons-arrows-pointing-out-20-solid'"
+              :name="
+                isFullscreen
+                  ? 'i-heroicons-arrows-pointing-in-20-solid'
+                  : 'i-heroicons-arrows-pointing-out-20-solid'
+              "
               class="h-5 w-5"
             />
           </button>
 
           <button
             type="button"
-            class="inline-flex items-center justify-center rounded-full border border-slate-200 bg-white/70 p-2 text-slate-700 shadow-sm backdrop-blur
-                   hover:bg-white dark:border-slate-800 dark:bg-slate-950/60 dark:text-slate-200 dark:hover:bg-slate-950"
+            class="inline-flex items-center justify-center rounded-full border border-slate-200 bg-white/70 p-2 text-slate-700 shadow-sm backdrop-blur hover:bg-white dark:border-slate-800 dark:bg-slate-950/60 dark:text-slate-200 dark:hover:bg-slate-950"
             @click="prev"
             :disabled="index === 0"
             aria-label="Previous"
@@ -312,8 +330,7 @@ function onSwipeCancel() {
 
           <button
             type="button"
-            class="inline-flex items-center justify-center rounded-full border border-slate-200 bg-white/70 p-2 text-slate-700 shadow-sm backdrop-blur
-                   hover:bg-white dark:border-slate-800 dark:bg-slate-950/60 dark:text-slate-200 dark:hover:bg-slate-950"
+            class="inline-flex items-center justify-center rounded-full border border-slate-200 bg-white/70 p-2 text-slate-700 shadow-sm backdrop-blur hover:bg-white dark:border-slate-800 dark:bg-slate-950/60 dark:text-slate-200 dark:hover:bg-slate-950"
             @click="next"
             :disabled="index === mediaItems.length - 1"
             aria-label="Next"
@@ -332,7 +349,9 @@ function onSwipeCancel() {
           @touchend="onSwipeEnd"
           @touchcancel="onSwipeCancel"
         >
-          <div class="pointer-events-none absolute inset-0 bg-linear-to-tr from-cyan-500/10 via-transparent to-violet-500/10" />
+          <div
+            class="pointer-events-none absolute inset-0 bg-linear-to-tr from-cyan-500/10 via-transparent to-violet-500/10"
+          />
 
           <Transition
             :name="direction === 'next' ? 'fade-next' : 'fade-prev'"
@@ -382,7 +401,7 @@ function onSwipeCancel() {
           <div
             ref="thumbsRef"
             class="mt-2 flex select-none gap-2 overflow-x-auto pb-1 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
-            style="touch-action: pan-x; -webkit-overflow-scrolling: touch;"
+            style="touch-action: pan-x; -webkit-overflow-scrolling: touch"
             :class="thumbDrag.active ? 'cursor-grabbing' : 'cursor-grab'"
             @pointerdown="onThumbPointerDown"
             @pointermove="onThumbPointerMove"
@@ -397,7 +416,7 @@ function onSwipeCancel() {
               :data-thumb-index="i"
               @click="onThumbClick($event, i)"
               :aria-label="`Go to slide ${i + 1}`"
-              style="width: 96px;"
+              style="width: 96px"
             >
               <div class="relative aspect-16/10">
                 <img
@@ -406,13 +425,15 @@ function onSwipeCancel() {
                   class="h-full w-full object-cover transition duration-300 group-hover:scale-[1.03]"
                   loading="lazy"
                   draggable="false"
-                  :style="i === index ? 'opacity: 0.4': ''"
+                  :style="i === index ? 'opacity: 0.4' : ''"
                 />
                 <div
                   v-if="m.type === 'video'"
                   class="absolute inset-0 flex items-center justify-center"
                 >
-                  <div class="rounded-full bg-black/45 p-2 text-white backdrop-blur">
+                  <div
+                    class="rounded-full bg-black/45 p-2 text-white backdrop-blur flex items-center"
+                  >
                     <UIcon name="i-heroicons-play-20-solid" class="h-4 w-4" />
                   </div>
                 </div>
@@ -455,17 +476,20 @@ function onSwipeCancel() {
               :disabled="index === mediaItems.length - 1"
               @click="next"
             >
-              <UIcon name="i-heroicons-chevron-right-20-solid" class="h-5 w-5" />
+              <UIcon
+                name="i-heroicons-chevron-right-20-solid"
+                class="h-5 w-5"
+              />
             </button>
 
-          <button
-            type="button"
-            class="inline-flex items-center justify-center rounded-full border border-white/20 bg-black/40 p-2 text-white backdrop-blur"
-            aria-label="Exit fullscreen"
-            @click="toggleFullscreen"
-          >
-            <UIcon name="i-heroicons-x-mark-20-solid" class="h-5 w-5" />
-          </button>
+            <button
+              type="button"
+              class="inline-flex items-center justify-center rounded-full border border-white/20 bg-black/40 p-2 text-white backdrop-blur"
+              aria-label="Exit fullscreen"
+              @click="toggleFullscreen"
+            >
+              <UIcon name="i-heroicons-x-mark-20-solid" class="h-5 w-5" />
+            </button>
           </div>
         </div>
 
@@ -495,19 +519,27 @@ function onSwipeCancel() {
           </video>
         </div>
 
-        <div class="mt-3 flex gap-2 overflow-x-auto pb-1 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
+        <div
+          class="mt-3 flex gap-2 overflow-x-auto pb-1 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
+        >
           <button
             v-for="(m, i) in mediaItems"
             :key="`full-${m.src}-${i}`"
             type="button"
             class="relative shrink-0 overflow-hidden rounded-lg border transition"
-            :class="i === index ? 'border-white/70' : 'border-white/20 opacity-80'"
-            style="width: 78px;"
+            :class="
+              i === index ? 'border-white/70' : 'border-white/20 opacity-80'
+            "
+            style="width: 78px"
             :aria-label="`Go to slide ${i + 1}`"
             @click="go(i)"
           >
             <div class="relative aspect-16/10">
-              <img :src="thumbSrc(m)" :alt="m.alt || ''" class="h-full w-full object-cover" />
+              <img
+                :src="thumbSrc(m)"
+                :alt="m.alt || ''"
+                class="h-full w-full object-cover"
+              />
               <div
                 v-if="m.type === 'video'"
                 class="absolute inset-0 flex items-center justify-center"
@@ -522,12 +554,18 @@ function onSwipeCancel() {
       </div>
     </div>
 
-    <figcaption v-if="caption" class="mt-4 text-center text-xs text-slate-500 dark:text-slate-400">
+    <figcaption
+      v-if="caption"
+      class="mt-4 text-center text-xs text-slate-500 dark:text-slate-400"
+    >
       {{ caption }}
     </figcaption>
   </figure>
 
-  <div v-else class="my-10 rounded-2xl border border-slate-200 bg-white/60 p-5 text-sm text-slate-600 dark:border-slate-800 dark:bg-slate-950/60 dark:text-slate-300">
+  <div
+    v-else
+    class="my-10 rounded-2xl border border-slate-200 bg-white/60 p-5 text-sm text-slate-600 dark:border-slate-800 dark:bg-slate-950/60 dark:text-slate-300"
+  >
     MediaCarousel: no items found.
   </div>
 </template>
@@ -537,7 +575,9 @@ function onSwipeCancel() {
 .fade-next-leave-active,
 .fade-prev-enter-active,
 .fade-prev-leave-active {
-  transition: opacity 220ms ease, transform 220ms ease;
+  transition:
+    opacity 220ms ease,
+    transform 220ms ease;
 }
 
 .fade-next-enter-from {
